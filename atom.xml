@@ -36,19 +36,4 @@
     
   </entry>
   
-  <entry>
-    <title><![CDATA[My first blog]]></title>
-    <link href="http://wenzhuang.me/2015/11/07/My-first-blog/"/>
-    <id>http://wenzhuang.me/2015/11/07/My-first-blog/</id>
-    <published>2015-11-07T15:48:19.000Z</published>
-    <updated>2015-11-07T15:48:55.567Z</updated>
-    <content type="html"><![CDATA[<p>This is my first blog.</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>This is my first blog.</p>
-]]>
-    </summary>
-    
-  </entry>
-  
 </feed>
