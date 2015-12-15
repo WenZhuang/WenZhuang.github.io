@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Beautiful Life]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://wenzhuang.me/"/>
-  <updated>2015-12-05T16:42:48.197Z</updated>
+  <updated>2015-12-15T09:32:52.007Z</updated>
   <id>http://wenzhuang.me/</id>
   
   <author>
@@ -13,6 +13,87 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Android多线程之AsyncTask]]></title>
+    <link href="http://wenzhuang.me/2015/12/14/Android%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BAsyncTask/"/>
+    <id>http://wenzhuang.me/2015/12/14/Android多线程之AsyncTask/</id>
+    <published>2015-12-14T13:30:00.000Z</published>
+    <updated>2015-12-15T09:32:52.007Z</updated>
+    <content type="html"><![CDATA[<p>对Android开发者来说，如何处理多线程问题是无法绕过的问题。每个Android开发者或多或少都遇到过ANR(Applicatin Not Responding)异常，Android默认当UI线程阻塞超过20s时将会引发ANR异常。因此在处理耗时操作时应当将其放入新线程中，但是这样将面临一个问题，如何在新线程中更新UI组件呢?<br>　　Android提供如下几种方案：Handler、AsyncTask、Activity.runOnUiThread(Runnable)、View.post(Runnable)和View.postDelayed(Runnable,long)。其中Handler功能最强大，处理最灵活，实际上AsyncTask正是对Handler的封装，而后三种方式则略显繁琐。AsyncTask是Android开发非常常用的处理多线程问题的工具，使用起来也简单方便，适用于简单的异步处理。<br>　　<br>　　AsyncTask<params,progress,result>是一个抽象类，通常用于被继承，需要制定三个泛型参数。Params，启动任务执行时的输入参数的类型；Progress，后台执行任务时进度值的类型；Result，后台执行任务返回结果的类型。通常需要实现AsyncTask的如下方法：doInBackgroud(Params…)完成后台执行的任务，只有这个方法在新线程中运行。onProgressUpdate(Progress… values)，当在doInBackgroud()方法中调用publishProgress(Progress… values)时将触发该方法，用于显示任务执行的进度；onPreExecute()用于在执行后台任务前完成一些初始化的工作；onPostExecute(Result result):在完成后台任务后，doInBackgroud()方法会把返回值传给该方法，该方法一般用于更新UI。<br>　　使用AsyncTask时一般遵循如下规则:必须在UI线程中创建AsyncTask的实例并调用execute()方法；AsyncTask的方法由Android自动调用，执行顺序是onPreExecute()、doInBackgroud()、onProgressUpdate（）和onPostExecute()；每个AnyncTask只能被执行一次，多次调用将引发异常。<br>　　　　<img src="http://7xo4wg.com1.z0.glb.clouddn.com/Android_funny_logo.jpg" alt=""><br>　　<br>　　笔者使用AsyncTask实现了一个下载图片的示例app。源代码及app截图说明已上传至我的github，地址<a href="https://github.com/WenZhuang/AndroidDemos" target="_blank" rel="external">https://github.com/WenZhuang/AndroidDemos</a>。AndroidDemos是我在github新建的一个仓库，以后会上传更多的Android示例程序代码。<br>　　其中，ImageTask扩展了AsyncTask,我单独把ImageTask的源代码上传至AndroidUtils仓库，地址<a href="https://github.com/WenZhuang/AndroidUtils/blob/master/ImageTask.java" target="_blank" rel="external">https://github.com/WenZhuang/AndroidUtils/blob/master/ImageTask.java</a>。我的AndroidUtils仓库用于存放有用的Android工具类，ImageTask可作为下载图片的工具类。另外欢迎大家关注我的github,地址是<a href="https://github.com/WenZhuang" target="_blank" rel="external">https://github.com/WenZhuang</a>。<br>　　<br>　　ImageTask的源代码如下所示。使用ImageTask时，先要传入一个Context对象和一个ImageView对象作为ImageTask构造函数的参数，并且在调用execute()时需要传入图片的URL地址。在onPreExecute()方法中，实现了对进度条的设置和显示。因为没有使用水平进度条来显示进度，因此没有重写onProgressUpdate()方法。在doInBackground(String…)方法中，使用了HttpClient访问网络，关于HttpClient的使用方法请见我的博文<em><a href="http://wenzhuang.me/2015/11/28/%E4%BD%BF%E7%94%A8HttpCLient%E5%A4%84%E7%90%86HTTP%E8%AF%B7%E6%B1%82/">使用HttpClient处理HTTP请求</a></em>。使用BitmapFactory的decodeStream(InputStream)方法将网络输入流转化成Bitmap对象。在onPostExecute(Bitmap)中实现了将图片装载入ImageView，并且让进度条消失。</params,progress,result></p>
+<pre><code><span class="preprocessor"><span class="keyword">import</span> android.app.ProgressDialog;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.content.Context;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.graphics.Bitmap;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.graphics.BitmapFactory;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.os.AsyncTask;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.widget.ImageView;</span>
+
+<span class="preprocessor"><span class="keyword">import</span> org.apache.http.HttpResponse;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.apache.http.HttpStatus;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.apache.http.client.HttpClient;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.apache.http.client.methods.HttpGet;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.apache.http.impl.client.DefaultHttpClient;</span>
+
+<span class="preprocessor"><span class="keyword">import</span> java.io.IOException;</span>
+
+<span class="comment">/**
+ * Created by JohnVenn on 2015/12/12.
+ */</span>
+<span class="class"><span class="keyword">class</span> <span class="title">ImageTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">String</span>,<span class="title">Void</span>,<span class="title">Bitmap</span>&gt; </span>{
+
+    <span class="keyword">private</span> ProgressDialog dialog;
+    <span class="keyword">private</span> Context context;
+    <span class="keyword">private</span> ImageView imageView;
+    ImageTask(Context context,ImageView imageView) {
+        <span class="keyword">this</span>.context = context;
+        <span class="keyword">this</span>.imageView = imageView;
+    }
+
+    @Override
+    <span class="keyword">protected</span> Bitmap doInBackground(String... params) {
+        Bitmap bitmap = <span class="literal">null</span>;
+        HttpClient httpClient = <span class="keyword">new</span> DefaultHttpClient();
+        HttpGet httpRequest = <span class="keyword">new</span> HttpGet(params[<span class="number">0</span>]);
+        <span class="keyword">try</span> {
+            HttpResponse httpResponse = httpClient.execute(httpRequest);
+            <span class="keyword">if</span> (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                bitmap = BitmapFactory.decodeStream(httpResponse.getEntity().getContent());
+            }
+        } <span class="keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+        <span class="keyword">return</span> bitmap;
+    }
+
+    @Override
+    <span class="keyword">protected</span> <span class="keyword">void</span> onPreExecute() {
+        <span class="keyword">super</span>.onPreExecute();
+        dialog = <span class="keyword">new</span> ProgressDialog(context);
+        dialog.setTitle(<span class="string">"图片正在下载"</span>);
+        dialog.setMessage(<span class="string">"正在为您玩命下载中......"</span>);
+        dialog.setCancelable(<span class="literal">false</span>);
+        dialog.show();
+    }
+
+    @Override
+    <span class="keyword">protected</span> <span class="keyword">void</span> onPostExecute(Bitmap bitmap) {
+        <span class="keyword">super</span>.onPostExecute(bitmap);
+        imageView.setImageBitmap(bitmap);
+        dialog.dismiss();
+    }
+}
+</code></pre><p>更多Android多线程的问题可以查看AndroidDeveloper的官方指南<a href="http://developer.android.com/guide/components/processes-and-threads.html" target="_blank" rel="external">http://developer.android.com/guide/components/processes-and-threads.html</a>。了解更多AsyncTask，可以访问Android官方API地址<a href="http://developer.android.com/reference/android/os/AsyncTask.html" target="_blank" rel="external">http://developer.android.com/reference/android/os/AsyncTask.html</a>。（注：访问Android官方网站时，国内用户需要翻墙。无力吐槽。）</p>
+<p><em>我的CSDN博客地址：<a href="http://blog.csdn.net/John_Venn" target="_blank" rel="external">http://blog.csdn.net/John_Venn</a></em></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>对Android开发者来说，如何处理多线程问题是无法绕过的问题。每个Android开发者或多或少都遇到过ANR(Applicatin Not Responding)异常，Android默认当UI线程阻塞超过20s时将会引发ANR异常。因此在处理耗时操作时应当将其放入新线程中]]>
+    </summary>
+    
+      <category term="Android" scheme="http://wenzhuang.me/tags/Android/"/>
+    
+      <category term="多线程" scheme="http://wenzhuang.me/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[摄影学习笔记之基本概念与法则]]></title>
@@ -128,7 +209,7 @@
     <link href="http://wenzhuang.me/2015/11/28/%E4%BD%BF%E7%94%A8HttpCLient%E5%A4%84%E7%90%86HTTP%E8%AF%B7%E6%B1%82/"/>
     <id>http://wenzhuang.me/2015/11/28/使用HttpCLient处理HTTP请求/</id>
     <published>2015-11-28T14:47:25.000Z</published>
-    <updated>2015-11-28T15:58:46.000Z</updated>
+    <updated>2015-12-15T08:48:02.755Z</updated>
     <content type="html"><![CDATA[<p>无论是B/S还是C/S，只要是涉及客户端与服务器的通信，那么如何处理HTTP请求就是无法避免的问题。<br>　　Java封装了HttpURLConnection提供给Java程序员做HTTP网络请求，然而使用HttpURLConnection做HTTP请求比较繁琐。如何简单快速地实现HTTP请求呢？Apache提供了一个专门用于处理HTTP请求的库HttpClient，使用起来方便快捷。<br>　　Java开发者使用HttpClient需要先到ApacheHttpClient的主页下载相关的jar包，官网地址<a href="http://hc.apache.org/httpclient-3.x/" target="_blank" rel="external">http://hc.apache.org/httpclient-3.x/</a>。<br>　　对于Android开发者来说，HttpClient几乎是最常用的用于处理HTTP请求的工具，在API21（Android4.4）及更早版本的SDK中，HttpClient被集成在SDK中，方便Android开发者处理HTTP请求。然而在API22及更新的Android SDK中HttpClient已经被去掉，然而开发者依然可以使用导入外部包的方式继续使用HttpClient进行开发。如果你是AndroidStudio用户，你还可以gradle进行包依赖管理,在build.gradle中加入如下声明：</p>
 <pre><code>　<span class="title">android</span> {
     <span class="title">useLibrary</span> <span class="string">'org.apache.http.legacy'</span>
