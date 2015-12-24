@@ -90,11 +90,11 @@
     </header>
     <div class="entry">
       
-        <p>无论是B/S还是C/S，只要是涉及客户端与服务器的通信，那么如何处理HTTP请求就是无法避免的问题。<br>　　Java封装了HttpURLConnection提供给Java程序员做HTTP网络请求，然而使用HttpURLConnection做HTTP请求比较繁琐。如何简单快速地实现HTTP请求呢？Apache提供了一个专门用于处理HTTP请求的库HttpClient，使用起来方便快捷。<br>　　Java开发者使用HttpClient需要先到ApacheHttpClient的主页下载相关的jar包，官网地址<a href="http://hc.apache.org/httpclient-3.x/" target="_blank" rel="external">http://hc.apache.org/httpclient-3.x/</a>。<br>　　对于Android开发者来说，HttpClient几乎是最常用的用于处理HTTP请求的工具，在API21（Android4.4）及更早版本的SDK中，HttpClient被集成在SDK中，方便Android开发者处理HTTP请求。然而在API22及更新的Android SDK中HttpClient已经被去掉，然而开发者依然可以使用导入外部包的方式继续使用HttpClient进行开发。如果你是AndroidStudio用户，你还可以gradle进行包依赖管理,在build.gradle中加入如下声明：</p>
+        <p>无论是B/S还是C/S，只要是涉及客户端与服务器的通信，那么如何处理HTTP请求就是无法避免的问题。<br>　　Java封装了HttpURLConnection提供给Java程序员做HTTP网络请求，然而使用HttpURLConnection做HTTP请求比较繁琐。如何简单快速地实现HTTP请求呢？Apache提供了一个专门用于处理HTTP请求的库HttpClient，使用起来方便快捷。<br>　　<a id="more"></a><br>　　Java开发者使用HttpClient需要先到<a href="http://hc.apache.org/httpclient-3.x/" target="_blank" rel="external">ApacheHttpClient官网</a>下载相关的jar包。对于Android开发者来说，HttpClient几乎是最常用的用于处理HTTP请求的工具，在API21（Android4.4）及更早版本的SDK中，HttpClient被集成在SDK中，方便Android开发者处理HTTP请求。然而在API22及更新的Android SDK中HttpClient已经被去掉，然而开发者依然可以使用导入外部包的方式继续使用HttpClient进行开发。如果你是AndroidStudio用户，你还可以gradle进行包依赖管理,在build.gradle中加入如下声明：</p>
 <pre><code>　<span class="title">android</span> {
     <span class="title">useLibrary</span> <span class="string">'org.apache.http.legacy'</span>
 }
-</code></pre><p>Http请求最常用的是Get和Post请求，对于HTTP协议及其方法此处不再赘述。对于Post和Get请求，HttpClient都封装了相应的类和方法方便开发者的使用。<br>　　笔者使用HttpClient写了一个工具类HttpUtils，包含两个静态方法doGet(String)和doPost(String,Map)分别实现了Get请求和Post请求。源代码已上传至Github，地址：<br>　<a href="https://github.com/WenZhuang/AndroidUtils/blob/master/HttpUtils.java" target="_blank" rel="external">https://github.com/WenZhuang/AndroidUtils/blob/master/HttpUtils.java</a><br>　　<img src="http://7xo4wg.com1.z0.glb.clouddn.com/Apache_logo.jpg" alt=""><br>　　以下是doGet方法的源代码，方法调用者需要传入一个目标URL地址作为参数，响应成功时返回响应字符串，失败时返回相应的响应码（如404）。首先需要创建一个HttpClient对象和一个HttpGet对象，给HttpGet设置请求参数（如设置响应超时时间等）这部分并非是必须的。HttpClient对象只需调用execute(HttpGet)方法就可以获得一个HttpResponse对象，该对象包含从服务器获取的HTTP响应。调用getEntity方法获取Http响应体。</p>
+</code></pre><p>Http请求最常用的是Get和Post请求，对于HTTP协议及其方法此处不再赘述。对于Post和Get请求，HttpClient都封装了相应的类和方法方便开发者的使用。<br>　　笔者使用HttpClient写了一个工具类HttpUtils，包含两个静态方法doGet(String)和doPost(String,Map)分别实现了Get请求和Post请求。源代码已上传至Github的<a href="https://github.com/WenZhuang/AndroidUtils/blob/master/HttpUtils.java" target="_blank" rel="external">AndroidUtils仓库</a>。<br>　　<img src="http://7xo4wg.com1.z0.glb.clouddn.com/Apache_logo.jpg" alt=""><br>　　以下是doGet方法的源代码，方法调用者需要传入一个目标URL地址作为参数，响应成功时返回响应字符串，失败时返回相应的响应码（如404）。首先需要创建一个HttpClient对象和一个HttpGet对象，给HttpGet设置请求参数（如设置响应超时时间等）这部分并非是必须的。HttpClient对象只需调用execute(HttpGet)方法就可以获得一个HttpResponse对象，该对象包含从服务器获取的HTTP响应。调用getEntity方法获取Http响应体。</p>
 <pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">doGet</span>(<span class="params">String url</span>)</span>{
         String responseStr = <span class="string">"Fail"</span>;
         <span class="keyword">try</span> {
@@ -181,7 +181,7 @@
 
     <span class="keyword">return</span> responseStr;
 }
-</code></pre><p>参考链接：<br>　<a href="http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html#behavior-apache-http-client" target="_blank" rel="external">http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html#behavior-apache-http-client</a></p>
+</code></pre><p>参考链接：　<a href="http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html#behavior-apache-http-client" target="_blank" rel="external">http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html#behavior-apache-http-client</a></p>
 
       
     </div>
