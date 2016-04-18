@@ -40,8 +40,8 @@
     <link href="http://wenzhuang.me/2016/03/25/%E6%8E%92%E5%BA%8F%E4%B9%8B%E5%88%9D%E7%AD%89%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
     <id>http://wenzhuang.me/2016/03/25/排序之初等排序算法/</id>
     <published>2016-03-25T11:06:46.000Z</published>
-    <updated>2016-04-18T14:02:54.469Z</updated>
-    <content type="html"><![CDATA[<p>　　这里要说的排序算法包括三个初等的排序算法：冒泡排序、选择排序和插入排序。它们在平均时间下的时间复杂度均为<em>O(n^2)</em>，但是他们的性质各不相同，适用于不同的场景。<br><a id="more"></a><br>　　笔者在Github新建了仓库<a href="https://github.com/WenZhuang/Algorithm" target="_blank" rel="external">Algorithm</a>，并将三种算法的实现以静态方法的形式放入<a href="https://github.com/WenZhuang/Algorithm/blob/master/sort/Sort.java" target="_blank" rel="external">Sort.java</a>中，使用了Java语言来进行算法描述。每次将实现了Comparable接口的对象进行升序排序。<br>　　排序中对时间复杂度影响最大的是对象之间的比较次数和交换次数，下面的三种排序算法都存在着比较和交换。为了方便，将比较和交换用静态方法实现，以供排序算法直接调用。比较和交换的代码如下：</p>
+    <updated>2016-04-18T14:50:50.094Z</updated>
+    <content type="html"><![CDATA[<p>这里要说的排序算法包括三个初等的排序算法：冒泡排序、选择排序和插入排序。它们在平均时间下的时间复杂度均为<em>O(n^2)</em>，但是他们的性质各不相同，适用于不同的场景。<br><a id="more"></a><br>　　笔者在Github新建了仓库<a href="https://github.com/WenZhuang/Algorithm" target="_blank" rel="external">Algorithm</a>，并将三种算法的实现以静态方法的形式放入<a href="https://github.com/WenZhuang/Algorithm/blob/master/sort/Sort.java" target="_blank" rel="external">Sort.java</a>中，使用了Java语言来进行算法描述。每次将实现了Comparable接口的对象进行升序排序。<br>　　排序中对时间复杂度影响最大的是对象之间的比较次数和交换次数，下面的三种排序算法都存在着比较和交换。为了方便，将比较和交换用静态方法实现，以供排序算法直接调用。比较和交换的代码如下：</p>
 <pre><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">boolean</span> <span class="title">less</span><span class="params">(Comparable v, Comparable w)</span> </span>{
     <span class="keyword">return</span> v.compareTo(w) &lt; <span class="number">0</span>;
 }
@@ -120,11 +120,13 @@
 
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>　　这里要说的排序算法包括三个初等的排序算法：冒泡排序、选择排序和插入排序。它们在平均时间下的时间复杂度均为<em>O(n^2)</em>，但是他们的性质各不相同，适用于不同的场景。<br>]]>
+    <![CDATA[<p>这里要说的排序算法包括三个初等的排序算法：冒泡排序、选择排序和插入排序。它们在平均时间下的时间复杂度均为<em>O(n^2)</em>，但是他们的性质各不相同，适用于不同的场景。<br>]]>
     
     </summary>
     
-      <category term="算法，排序" scheme="http://wenzhuang.me/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E6%8E%92%E5%BA%8F/"/>
+      <category term="排序" scheme="http://wenzhuang.me/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="算法" scheme="http://wenzhuang.me/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
