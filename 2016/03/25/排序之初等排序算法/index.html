@@ -79,12 +79,95 @@
 
 
 
+  
+  <div class="tags">
+  	<i class="fa fa-tag"></i>
+    <a href="/tags/算法，排序/">算法，排序</a>
+  </div>
+
 <div class="clear"></div>
       
     </header>
     <div class="entry">
       
-        
+        <p>　　这里要说的排序算法包括三个初等的排序算法：冒泡排序、选择排序和插入排序。它们在平均时间下的时间复杂度均为<em>O(n^2)</em>，但是他们的性质各不相同，适用于不同的场景。<br><a id="more"></a><br>　　笔者在Github新建了仓库<a href="https://github.com/WenZhuang/Algorithm" target="_blank" rel="external">Algorithm</a>，并将三种算法的实现以静态方法的形式放入<a href="https://github.com/WenZhuang/Algorithm/blob/master/sort/Sort.java" target="_blank" rel="external">Sort.java</a>中，使用了Java语言来进行算法描述。每次将实现了Comparable接口的对象进行升序排序。<br>　　排序中对时间复杂度影响最大的是对象之间的比较次数和交换次数，下面的三种排序算法都存在着比较和交换。为了方便，将比较和交换用静态方法实现，以供排序算法直接调用。比较和交换的代码如下：</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">boolean</span> <span class="title">less</span><span class="params">(Comparable v, Comparable w)</span> </span>{
+    <span class="keyword">return</span> v.compareTo(w) &lt; <span class="number">0</span>;
+}
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">exch</span><span class="params">(Comparable[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>{
+    Comparable t = a[i];
+    a[i] = a[j];
+    a[j] = t;
+}
+</code></pre><p>　　　<img src="http://7xo4wg.com1.z0.glb.clouddn.com/the_best_sort.png" alt=""></p>
+<p><strong>冒泡排序</strong><br>　　冒泡排序是大部分人最早接触的排序算法，“冒泡”一词也可谓是生动形象。对于大小为n的数组来说，要经历n趟排序。每一趟比较相邻两个对象，如果后一对象小于前一对象，则将两者交换。每一趟排序，这一趟最大的元素都会出现在最后一个位置，就像是冒泡一样。n趟排序后排序完成。冒泡排序的算法实现如下：</p>
+<pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(Comparable[] a)</span> </span>{
+    final <span class="keyword">int</span> N = a.length;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = N - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) {
+        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) {
+            <span class="keyword">if</span> (less(a[j + <span class="number">1</span>], a[j])) {
+                exch(a, j, j + <span class="number">1</span>);
+            }
+        }
+    }
+}
+</code></pre><p><strong>选择排序</strong><br>　　选择排序是最简单的排序算法，它的时间复杂度与输入无关。对于大小为n的数组，需经历n趟排序，每一趟遍历整个数组，找到最小的对象并与第一个对象交换。n趟排序后，排序完成。选择排序的算法实现如下：</p>
+<pre><code>　　
+　<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> selectionSort(Comparable[] a) {
+    <span class="keyword">final</span> <span class="built_in">int</span> N = a.length;
+    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; N; i++) {
+        <span class="built_in">int</span> <span class="built_in">min</span> = i;
+        <span class="keyword">for</span> (<span class="built_in">int</span> j = i; j &lt; N; j++)
+            <span class="keyword">if</span> (less(a[j], a[<span class="built_in">min</span>])) {
+                <span class="built_in">min</span> = j;
+            }
+        exch(a, i, <span class="built_in">min</span>);
+    }
+}
+</code></pre><p><strong>插入排序</strong><br>　　与选择排序不同，插入排序的所需时间与输入密切相关。插入排序特别适合部分有序的数组的排序，或者小规模数组的排序。例如，希尔排序就是对插入排序的改进，它先将数组变成部分有序，再进行排序。在对归并排序和快速排序的改进算法中，可在数组递归到小规模数组时使用插入排序，以减小递归对时间的消耗。插入排序的算法实现如下：</p>
+<pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertionSort</span><span class="params">(Comparable[] a)</span> </span>{
+        final <span class="keyword">int</span> N = a.length;
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N - <span class="number">1</span>; i++) {
+            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &gt; <span class="number">0</span>; j--)
+                <span class="keyword">if</span> (less(a[j], a[j - <span class="number">1</span>])) {
+                    exch(a, j, j - <span class="number">1</span>);
+                }
+        }
+    }
+</code></pre><p><strong>测试用例</strong><br>　　一般来说，排序算法在处理大规模数组时才能体现出优势。这里我仅仅验证了各种算法的正确性。测试代码放在<a href="https://github.com/WenZhuang/Algorithm/blob/master/test/SortTest.java" target="_blank" rel="external">SortTest.java</a>中，先随机生成了10个0~100的整数，赋给大小为10的整型数组中，注意这里的整型要变成响相应的包装类Integer。然后，对数组排序，分别输出排序前和排序后的数组。要测试不同算法，只需改动代码中注释的位置。代码如下：
+　　</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> SortTest {
+
+<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    <span class="comment">// TODO Auto-generated method stub</span>
+    Integer[] a = <span class="keyword">new</span> Integer[<span class="number">10</span>];
+    final <span class="keyword">int</span> N = a.length;
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++){
+        a[i] = (<span class="keyword">int</span>) (Math.random()*<span class="number">100</span>);
+    }
+    System.out.println(<span class="string">"排序前"</span>);
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++){
+        System.out.print(a[i] + <span class="string">" "</span>);
+    }
+        Sort.BubbleSort(a);
+<span class="comment">//        Sort.selectionSort(a);</span>
+<span class="comment">//        Sort.insertionSort(a);</span>
+        System.out.println(<span class="string">"\n排序后"</span>);
+        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++){
+            System.out.print(a[i] + <span class="string">" "</span>);
+        }        
+    }
+}
+</code></pre><p><strong>测试结果</strong></p>
+<pre><code>排序前：
+<span class="number">53</span> <span class="number">41</span> <span class="number">72</span> <span class="number">60</span> <span class="number">85</span> <span class="number">72</span> <span class="number">40</span> <span class="number">16</span> <span class="number">64</span> <span class="number">6</span> 
+排序后：
+<span class="number">6</span> <span class="number">16</span> <span class="number">40</span> <span class="number">41</span> <span class="number">53</span> <span class="number">60</span> <span class="number">64</span> <span class="number">72</span> <span class="number">72</span> <span class="number">85</span>
+</code></pre> <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=108251&auto=1&height=66"></iframe>
+
+
+
       
     </div>
     <footer>
