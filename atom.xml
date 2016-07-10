@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Beautiful Life]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://wenzhuang.me/"/>
-  <updated>2016-04-01T16:49:09.617Z</updated>
+  <updated>2016-07-10T07:29:59.601Z</updated>
   <id>http://wenzhuang.me/</id>
   
   <author>
@@ -15,17 +15,30 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[背景音乐]]></title>
+    <link href="http://wenzhuang.me/2016/12/25/%E8%83%8C%E6%99%AF%E9%9F%B3%E4%B9%90/"/>
+    <id>http://wenzhuang.me/2016/12/25/背景音乐/</id>
+    <published>2016-12-25T07:25:19.000Z</published>
+    <updated>2016-07-10T07:29:59.601Z</updated>
+    <content type="html"><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="450" src="http://music.163.com/outchain/player?type=0&id=15625175&auto=1&height=430"></iframe>]]></content>
+    <summary type="html">
+    <![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="450" src="http://music.163.com/outchain/player?type]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[23岁写给自己]]></title>
     <link href="http://wenzhuang.me/2016/04/02/23%E5%B2%81%E5%86%99%E7%BB%99%E8%87%AA%E5%B7%B1/"/>
     <id>http://wenzhuang.me/2016/04/02/23岁写给自己/</id>
     <published>2016-04-01T16:18:26.000Z</published>
-    <updated>2016-04-01T16:49:09.617Z</updated>
-    <content type="html"><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=29431066&auto=1&height=66"></iframe>
+    <updated>2016-07-10T07:26:49.722Z</updated>
+    <content type="html"><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=29431066&auto=0&height=66"></iframe>
 
 <p>王小波在他的《黄金时代》里面写到：“那一天我二十一岁，在我一生的黄金时代，我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。”<br><a id="more"></a> 　　读到这一句的时候，我正好二十一岁。当时我却并没有这种感觉，我没预料到我会在多年以后想起它，在我二十三岁的年纪。现在，我觉得这是我一生的黄金时代。<br>　　在我二十一岁的时候，我觉得自己是一朵飘在天空的乌云，风吹来，风吹走，留下一场雨。天空是灰色的，生活是坚硬的。随波逐流吧，不甘；特立独行吧，无奈。我想那是我的黑铁时代吧。<br>　　现在，我觉得，自己是天空中一只鸟，有了自己的翅膀，寻找最让自己快乐的树枝栖息，天上有一朵半明半暗的云。就像王小波说的：“我觉得自己会一直生猛下去。”<br>　　其实我一直没有变，我既不是云也不是鸟。但是我却一直在改变，我相信当我觉得我是鸟的时候，我是有翅膀的。当天空是灰色的时候，我能够面对它了，我不会被风裹着飘来飘去。我觉得这是我的黄金时代吧。<br>　　泰戈尔有一句诗：“云儿愿为一只鸟，鸟儿愿做一朵云。”我想我既愿意做一只鸟，也愿意做一朵云，如果那不是乌云的话。或者有一天我愿意做一只特立独行的猪。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=29431066&auto=1&height=66"></iframe>
+    <![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=29431066&auto=0&height=66"></iframe>
 
 <p>王小波在他的《黄金时代》里面写到：“那一天我二十一岁，在我一生的黄金时代，我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。”<br>]]>
     
@@ -40,7 +53,7 @@
     <link href="http://wenzhuang.me/2016/03/25/%E5%88%9D%E7%AD%89%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
     <id>http://wenzhuang.me/2016/03/25/初等排序算法/</id>
     <published>2016-03-25T11:06:46.000Z</published>
-    <updated>2016-04-18T14:54:43.756Z</updated>
+    <updated>2016-04-18T14:57:16.747Z</updated>
     <content type="html"><![CDATA[<p>这里要说的排序算法包括三个初等的排序算法：冒泡排序、选择排序和插入排序。它们在平均时间下的时间复杂度均为<em>O(n^2)</em>，但是他们的性质各不相同，适用于不同的场景。<br><a id="more"></a><br>　　笔者在Github新建了仓库<a href="https://github.com/WenZhuang/Algorithm" target="_blank" rel="external">Algorithm</a>，并将三种算法的实现以静态方法的形式放入<a href="https://github.com/WenZhuang/Algorithm/blob/master/sort/Sort.java" target="_blank" rel="external">Sort.java</a>中，使用了Java语言来进行算法描述。每次将实现了Comparable接口的对象进行升序排序。<br>　　排序中对时间复杂度影响最大的是对象之间的比较次数和交换次数，下面的三种排序算法都存在着比较和交换。为了方便，将比较和交换用静态方法实现，以供排序算法直接调用。比较和交换的代码如下：</p>
 <pre><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">boolean</span> <span class="title">less</span><span class="params">(Comparable v, Comparable w)</span> </span>{
     <span class="keyword">return</span> v.compareTo(w) &lt; <span class="number">0</span>;
