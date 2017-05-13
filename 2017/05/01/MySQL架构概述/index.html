@@ -1,0 +1,288 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL架构概述 | John&#39;s Blog</title>
+  <meta name="author" content="John Venn">
+  
+  <meta name="description" content="科技 文艺">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="MySQL架构概述"/>
+  <meta property="og:site_name" content="John&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="John&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-368771XX-X']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+<body>
+  <header id="header" class='normal_mode'>
+    <nav id="main-nav">
+  <ul class='container'>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+  </header>
+  <div id="content" class="container">
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+      <time datetime="2017-05-01T15:55:00.000Z"><a href="/2017/05/01/MySQL架构概述/">周一, 5月 1 2017, 11:55:00 晚上</a></time>
+
+  
+    <h1 class="title">MySQL架构概述</h1>
+  
+
+
+
+  
+  <div class="tags">
+  	<i class="fa fa-tag"></i>
+    <a href="/tags/MySQL/">MySQL</a>, <a href="/tags/数据库/">数据库</a>
+  </div>
+
+<div class="clear"></div>
+      
+    </header>
+    <div class="entry">
+      
+        <p>MySQL最重要、最与众不同的特性是它的存储引擎架构，这种架构的设计将查询处理（Query Processing）及其他系统任务（Server Task）和数据的存储/提取相分离。本文概要地描述了MySQL的服务器架构以及各存储引擎之间的主要区别。<br><a id="more"></a></p>
+<h1 id="1-MySQL逻辑架构">1.MySQL逻辑架构</h1><p>下图展示了MySQL的逻辑架构图。</p>
+<blockquote>
+<p>　<img src="http://7xo4wg.com1.z0.glb.clouddn.com/mysql_architecture.png" alt="MySQL服务器逻辑架构图"></p>
+</blockquote>
+<p>　　MySQL的逻辑架构分为三层。<br>　　最上层的服务并不是MySQL所独有，大多数基于网络的客户端/服务器的工具或者服务都有类似架构。比如连接处理、授权认证、安全等。<br>　　大多数MySQL的核心服务都在第二层，包括查询、分析、优化、缓存以及所有的内置函数，所有的跨存储引擎的功能都在这一层实现：存储过程、触发器、视图。<br>　　第三层包含了存储引擎。存储引擎负责MySQL中数据的存储和提取。服务器通过API与存储引擎进行通信，这些接口屏蔽了存储引擎间的差异性，使得这些差异对上层的查询过程透明。存储引擎不会去解析SQL（除InnoDB会解析外键之外），不同存储引擎之间也不会相互通信，而只是简单地响应上层服务器的请求。</p>
+<h2 id="1-1连接管理与安全性">1.1连接管理与安全性</h2><p>每一个客户端连接都会在服务器进程中拥有一个线程，这个连接的查询只会在这个单独的线程中执行。服务器会缓存线程，因此不需要为每个新建的连接创建和销毁线程。<br>　　但客户端连接到MySQL服务器时，服务器需要对其进行认证。认证基于用户名、原始主机信息和密码。一旦客户端连接成功，服务器会继续验证该客户端是否具有执行某个特定查询的权限。</p>
+<h2 id="1-2优化与执行">1.2优化与执行</h2><!--more-->
+<h1 id="2-并发控制">2.并发控制</h1><h2 id="2-1读写锁">2.1读写锁</h2><ul>
+<li>共享锁 读锁 非阻塞</li>
+<li>排他锁 写锁 阻塞</li>
+</ul>
+<p>写锁比读锁有更高的优先级，可以插入到读锁队列的前面</p>
+<h2 id="2-2锁粒度">2.2锁粒度</h2><p>锁策略：在锁的开销和数据的安全性之间寻求平衡</p>
+<ul>
+<li>表锁 开销最小 alter table表锁</li>
+<li>行锁 最大并发度，最大锁开销</li>
+</ul>
+<h1 id="3-事务">3.事务</h1><p>事务是一组原子性的SQL查询，或者说一个独立的工作单元。事务内的语句要么全部执行成功，要么全部执行失败。</p>
+<ul>
+<li>START TRANSACTION 开始事务</li>
+<li>COMMIT提交事务</li>
+<li>ROLLBACK撤销事务</li>
+</ul>
+<p><strong>事务的特征ACID</strong><br><em>atomicity 原子性</em><br>一个事务必须被视为一个不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败回滚。<br><em>consistency 一致性</em><br>数据库总是从一个一致性的状态转换到另外一个一致性的状态。<br><em>isolation隔离性</em><br>通常来说，一个事务所做的修改在最终提交前，对其它事务是不可见的。<br><em>durability持久性</em><br>一旦事务提交，则其所做的修改就会永久保存到数据库中。</p>
+<h2 id="3-1隔离级别">3.1隔离级别</h2><p>SQL标准定义了四种隔离级别，每一种级别都规定了一个事务中所做的修改，哪些在事务内和事务间是可见的，哪些是不可见的。较低级别的隔离通常可以执行更高的并发，系统的开销也更低。</p>
+<ul>
+<li>READ UNCOMMITED（未提交读）</li>
+</ul>
+<p>事务中的修改即使没有提交，对其他事务也都是可见的。事务可以读取未提交的数据，这被称为脏读（Dirty Read）。</p>
+<ul>
+<li>READ COMMIT（提交读）</li>
+</ul>
+<p>一个事务从开始到提交之前，所做的任何修改对其它事务都是不可见的。这个级别有时候也叫不可重复读（nonrepeateble read），因为两次执行相同的查询，可能会得到不一样的结果。</p>
+<ul>
+<li>REPEATABLE READ （可重复读）</li>
+</ul>
+<p>解决了脏读和不可重复读，理论上，无法解决幻读的问题。<br>幻读（Phantom Read），是指当某个事务在读取某个范围内的记录时，另一个事务又在该范围内插入了新的记录，当之前的事务再次读取范围的记录时，会产生幻行。<br>InnoDB和XtraDB存储引擎通过多版本并发控制解决了幻读的问题。<br>可重复读是MySQL的默认隔离级别。</p>
+<ul>
+<li>SERIALIZABLE（可串行化）</li>
+</ul>
+<p>SERIALIZABLE是最高的隔离级别。它通过强制事务串行执行，避免前面说的幻读的问题。</p>
+<p><img src="http://7xo4wg.com1.z0.glb.clouddn.com/mysql_isolation_table.jpg" alt="ANSI SQL隔离级别"></p>
+<h2 id="3-2死锁">3.2死锁</h2><p>死锁是指两个或者多个事务在同一资源上相互占用，并请求锁定对方占用的资源，从而导致恶性循环的现象。当多个事务试图以不同的顺序锁定资源时，就可能产生死锁。多个事务同时锁定一个资源时，也会产生死锁。<br>InnoDB目前处理死锁的方法是，将持有最少行级排他锁的事务进行回滚。<br>死锁的产生有双重因素：有些是真正的数据冲突，有些是由于存储引擎的实现方式导致的。死锁发生后，只有部分或者完全回滚其中一个事务才能打破死锁。大多数情况下，只需重新执行因死锁回滚的事务即可。</p>
+<h2 id="3-3事务日志">3.3事务日志</h2><h2 id="3-4MySQL中的事务">3.4MySQL中的事务</h2><p>MySQL中提供了两种事务型的存储引擎：InnoDB和NDB Cluster。另外还有一些第三方的存储引擎，比如XtraDB和PBXT。</p>
+<h1 id="4-多版本并发控制（MVCC）">4.多版本并发控制（MVCC）</h1><p>可以认为MVCC是行级锁的一个变种，但是在很多情况下避免了加锁操作，开销更低。<br>　　MVCC的实现，是通过保存数据在某一个时间点的快照来实现的。不管需要执行多长时间，每个事务看到的数据都是一致的。根据事务开始时间的不同，每个事务对同一张表，同一时刻看到的数据可能是不一样的。<br>　　不同存储引擎的MVCC实现不同，典型的有乐观并发控制和悲观并发控制。InnoDB的MVCC，是通过在每行记录后面保存两个隐藏的列来实现的。这两个列，一个保存了行的创建时间，一个保存行的过期时间（或删除时间）。存储的不是实际的时间值，而是系统版本号。每开始一个新的事务，系统版本号都会自动递增。事务开始时刻的系统版本号会作为事务的版本号，用来和查询到的每行记录的版本号进行比较。保存这两个额外的系统版本号，使大多数读操作都可不用加锁。不足之处是每行记录都需要额外的存储空间。MVCC只在REPEATABLE READ和READ COMMITTED两个隔离级别下工作。</p>
+<h1 id="5-存储引擎">5.存储引擎</h1><p>MySQL将每个数据库（也可称之为schema）保存为数据目录下的一个子目录。创建表时，MySQL会在数据库子目录下创建一个和表同名的.frm文件保存表的定义。</p>
+<h2 id="5-1_InnoDB">5.1 InnoDB</h2><p>　　MySQL默认的事务型引擎。<br>　　InnoDB采用MVCC来支持高并发，并且实现了四个标准的隔离级别。<br>默认REPEATABLE READ，通过间隙锁（next-key locking）策略防止幻读的出现。间隙锁使得InnoDB不仅仅锁定查询涉及的行，还会对索引中的间隙进行锁定，以防止幻影行的插入。<br>　　InnoDB是基于聚簇索引建立的，对之间查询有很高的性能。它的二级索引（非主键索引）中必须包含主键列，如果主键列很大的话，其它所有索引都会很大。<br>　　从磁盘读取数据时采用可预测性预读，能够自动在内存中创建hash索引以加速读操作的自适应哈希索引(adaptive hash index)，以及能够加速插入操作的插入缓冲区（insert buffer）等。<br>参见 官方手册《InnoDB事务模型和锁》<br>　　InnoDB可以通过一些机制和工具支持真正的热备份，Oracle的MySQL Enterprise Backup、Percona的XtraBackup可以做到这一点。MySQL的其它存储引擎不支持热备份，要获取一致性视图需要停止对所有表的写入。</p>
+<h2 id="5-2_MyISAM">5.2 MyISAM</h2><p>MyISAM支持全文本索引、压缩、空间函数（GIS）等。不支持事务和行级锁，崩溃后无法安全恢复。<br>　　MyISAM将表存在两个文件中：数据文件（.MYD）索引文件（.MYI）。如果表是变长行，则默认配置只能处理256TB的数据。<br>特性
+　　</p>
+<ul>
+<li>加锁与并发<br>对整张表而不是行加锁。但是在表有读取查询的同时，也可以往表中插入新的记录（并发插入，concurrent insert）</li>
+<li>修复</li>
+</ul>
+<p>　CHECK TABLE mytabl　检查表的错误。<br>　REPAIR TABLEmytable进行修复。<br>　MySQL服务器关闭，可以用myisamchk命令行工具进行检查和修复。</p>
+<p>　</p>
+<ul>
+<li>索引<br>即使是BLOB和TEXT等长字段，也可以基于其前500个字符创建索引。MyISAM也支持全文本索引，是一种基于分词创建的索引，可以支持复杂的查询。延迟更新索引键（Delay Key Write）</li>
+<li>创建MyISAM表</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+          
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <span class="jiathis_txt">分享到：</span>
+  <a class="jiathis_button_weixin">微信</a>
+  <a class="jiathis_button_tsina">新浪微博</a>
+  <a class="jiathis_button_renren">人人网</a>
+  <a class="jiathis_button_qzone">QQ空间</a>
+  <a class="jiathis_button_douban">豆瓣</a>
+  <a class="jiathis_button_pocket">Pocket</a>
+  <a href="http://www.jiathis.com/share?uid=901656" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=901656" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+          <div class="clearfix"></div>
+          <nav id="pagination">
+  
+    <a href="/2100/12/25/背景音乐/" class="alignleft prev"><i class="fa fa-long-arrow-left"></i>Next</a>
+  
+  
+    <a href="/2016/04/02/23岁写给自己/" class="alignright next">Prev<i class="fa fa-long-arrow-right"></i></a>
+  
+  <div class="clearfix"></div>
+</nav>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-thread-key="/2017/05/01/MySQL架构概述/"></div>
+<!-- Duoshuo Comment END -->
+  
+</section>
+
+
+
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div>
+  
+  &copy; 2017 John Venn
+  
+</div>
+Powered by <a href="http://zespia.tw/hexo/" title="Hexo" target="_blank" rel="external">Hexo</a> and <a href="http://pages.github.com/" title="GitHub Pages" target="_blank" rel="external">GitHub Pages</a>
+
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery.imagesloaded.min.js" type="text/javascript"></script>
+<script src="/js/gallery.js" type="text/javascript"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js" type="text/javascript"></script>
+
+
+
+
+    <script type="text/javascript">
+        (function(){
+
+            $(window).scroll(function(){
+
+                var scrollTop = $(window).scrollTop();
+                if ( scrollTop >200 ){
+                    $("#main-nav").removeClass('normal_mode').addClass('top_mode');
+                } else{
+                    $("#main-nav").removeClass('top_mode').addClass('normal_mode');
+                }
+
+            });
+
+        })();
+    </script>
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox({
+      'titlePosition': 'inside'
+    });
+  })(jQuery);
+  </script>
+
+
+
+    
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"wenzhuang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = 'http://static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] 
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  
+  $(function(){
+
+    $('.title').hover(
+      function() {      
+        $(this).stop().animate(
+          {'marginLeft': '10px'}, 200
+        );   
+      }, 
+      function() {       
+        $(this).stop().animate({'marginLeft': '0px'}, 200);      
+      
+    });   
+
+  });
+
+</script>
+
+
+</body>
+</html>
