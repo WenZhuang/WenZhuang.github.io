@@ -32,7 +32,7 @@
     <link href="http://wenzhuang.me/2017/05/17/2017%E6%9A%91%E6%9C%9F%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/"/>
     <id>http://wenzhuang.me/2017/05/17/2017暑期实习面经/</id>
     <published>2017-05-17T11:59:33.000Z</published>
-    <updated>2017-05-17T12:05:34.614Z</updated>
+    <updated>2017-05-17T12:06:55.247Z</updated>
     <content type="html"><![CDATA[<h1 id="阿里">阿里</h1><h2 id="一面（电话面）">一面（电话面）</h2><p>自我介绍</p>
 <p>工程类：<br>ArrayList和LinkedList的区别和适用场景<br>什么是死锁？<br>怎样用栈实现队列<br>JVM内存分配<br>JVM垃圾回收机制<br>HashMap实现线程安全<br>HashMap和TreeMap的底层实现原理，插入一个数的时间复杂度<br>Spring实现原理<br>是不是用过MyBaits/Hibernate/网络请求相关框架（我回答没有或不熟，没有继续追问）</p>
 <p>算法类<br>1.判断一个数是不是2的幂</p>
@@ -88,6 +88,8 @@
     <![CDATA[<h1 id="阿里">阿里</h1><h2 id="一面（电话面）">一面（电话面）</h2><p>自我介绍</p>
 <p>工程类：<br>ArrayList和LinkedList的区别和适用场景<br>什么是死锁？<br>怎样用栈实现队列<br>JVM内存分配<br>JVM垃]]>
     </summary>
+    
+      <category term="Java" scheme="http://wenzhuang.me/tags/Java/"/>
     
   </entry>
   
