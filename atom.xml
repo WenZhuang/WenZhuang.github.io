@@ -32,8 +32,9 @@
     <link href="http://wenzhuang.me/2017/05/17/2017%E6%9A%91%E6%9C%9F%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/"/>
     <id>http://wenzhuang.me/2017/05/17/2017暑期实习面经/</id>
     <published>2017-05-17T11:59:33.000Z</published>
-    <updated>2017-05-17T12:06:55.247Z</updated>
-    <content type="html"><![CDATA[<h1 id="阿里">阿里</h1><h2 id="一面（电话面）">一面（电话面）</h2><p>自我介绍</p>
+    <updated>2017-05-31T03:56:42.528Z</updated>
+    <content type="html"><![CDATA[<p>漫长的暑期实习面试结束了，从3月下旬到5月上旬，笔者面试了十余家公司，面试过程也多有波折。最后笔者还是如愿拿到了阿里巴巴淘宝技术部的实习Offer，此外还收到了小米影业的实习Offer。最终选择了阿里巴巴，梦想成真。 　　<br>　　尘埃落定，笔者决定将面试经验给大家分享一下。笔者面试方向以Java开发为主，内容包括Java开发基础、数据结构与算法、Linux与数据库等内容。非Java开发的同学也能从中得到启发。希望能给尚未找到暑期实习的同学提供一些帮助，给2017正式校招面试提供一些参考和借鉴<br><a id="more"></a></p>
+<h1 id="阿里">阿里</h1><h2 id="一面（电话面）">一面（电话面）</h2><p>自我介绍</p>
 <p>工程类：<br>ArrayList和LinkedList的区别和适用场景<br>什么是死锁？<br>怎样用栈实现队列<br>JVM内存分配<br>JVM垃圾回收机制<br>HashMap实现线程安全<br>HashMap和TreeMap的底层实现原理，插入一个数的时间复杂度<br>Spring实现原理<br>是不是用过MyBaits/Hibernate/网络请求相关框架（我回答没有或不熟，没有继续追问）</p>
 <p>算法类<br>1.判断一个数是不是2的幂</p>
 <ol>
@@ -57,7 +58,7 @@
 <h2 id="五面（hr面）">五面（hr面）</h2><p>自我介绍<br>问题<br>1.你的专业并不是计算机专业，你平时是怎样学习计算机相关知识的<br>2.你谈到比如在百度全Linux环境编程，你是如何克服这些困难的<br>3.谈一谈你在百度实习的收获<br>4.遇到一些比如需要多人协作或者跨部门解决或者你推动的项目时，你会如何解决<br>5.说说你都有哪些学习方法<br>6.与其他面试者相比，你觉得你有哪些优势<br>7.谈谈你未来的规划<br>8.你有哪些问我的</p>
 <h1 id="微软（一面二面）">微软（一面二面）</h1><p>算法<br>1.二叉树的反序列化<br>2.堆的初始化<br>3.平面上有n个点，找到一条直线将这些点平均分为两部分<br>工程<br>如果MySQL数据库由于连接数过多而崩溃，这时该怎么做（从数据库的角度考虑）</p>
 <h1 id="京东（一面二面）">京东（一面二面）</h1><p>MySQL有哪些索性<br>使用like匹配时用到了哪些索引<br>说一下IO与NIO以及适用场景<br>使用多线程会造成哪些问题<br>说一下JVM的垃圾回收的过程及常用算法</p>
-<h1 id="腾讯（一面）">腾讯（一面）</h1><p>工程：<br>进程间有哪些通信方式<br>SQL中join的用法<br>TCP的连接和断开<br>哪个Linux命令可以查看TCP的连接状态<br>算法：<br>求链表倒数第k个节点<br>判断两个链表是否有交叉<br>两个数组求其交集（位哈希）<br>求字符串的全排列（递归）</p>
+<h1 id="腾讯">腾讯</h1><p>工程：<br>进程间有哪些通信方式<br>SQL中join的用法<br>TCP的连接和断开<br>哪个Linux命令可以查看TCP的连接状态<br>算法：<br>求链表倒数第k个节点<br>判断两个链表是否有交叉<br>两个数组求其交集（位哈希）<br>求字符串的全排列（递归）</p>
 <h1 id="搜狐">搜狐</h1><p>你做过的最重要的Java开发项目是什么？<br>（我谈到JDBC）<br>JDBC的开发流程<br>使用Statement可能发生怎样的SQL注入<br>preparedStatement是怎样防止SQL注入的<br>如果使用statement你怎样去防止SQL注入<br>如果JDBC的连接数过多你怎样去解决每次连接都要新建一个连接带来的问题<br>（谈到单例）<br>写一个获取单例连接的程序<br>（谈到连接池）<br>说一说连接池是怎样解决连接过多的问题的<br>(java数据库连接池实现原理)<br>(  数据库连接池的解决方案是在应用程序启动时建立足够的数据库连接，并讲这些连接组成一个连接池(简单说：在一个“池”里放了好多半成品的数据库联接对象)，由应用程序动态地对池中的连接进行申请、使用和释放。对于多于连接池中连接数的并发请求，应该在请求队列中排队等待。)<br>平时你做项目都用到哪些数据结构<br>（ArrayList HashMap 栈 队列）<br>哪些地方用到了栈和队列</p>
 <p>平时有哪些常用的Linux命令<br>（谈到ps）<br>ps你常用哪些命令行选项<br>（-ef）<br>-ef代表什么意思<br>（-e/-A显示所有的进程 -f显示程序间的关系<br>显示所有进程信息，连同命令行）<br>怎样找到所有正在运行的Java进程<br>（ ps -ef | grep java）</p>
 <p>你平时都用到了Spring的哪些功能<br>（谈到Spring MVC）<br>Spring MVC有哪些配置<br>Spring MVC怎样处理请求<br>从你打开浏览器，输入一个网址到页面呈现，这整个过程都发生了什么</p>
@@ -70,23 +71,37 @@
 <p>常用的设计模式<br>单例模式<br>Java：单例模式的七种写法<br>枚举单例模式如何防止反射攻击<br>数据库引擎<br>InnoDB和MyISAM各自的优点<br>（谈谈数据库中MyISAM与InnoDB区别 针对业务类型选择合适的表）<br>按排序策略分<br>排序分为：插入、选择、交换、归并和分配排序</p>
 <p>MyISAM里有几个文件<br>（每个MyISAM在磁盘上存储成三个文件，每一个文件的名字均以表的名字开始，扩展名指出文件类型。<br>.frm文件存储表定义；<br>·MYD (MYData)文件存储表的数据；<br>.MYI (MYIndex)文件存储表的索引。）</p>
 <h1 id="今日头条">今日头条</h1><p>算法<br>1.复杂链表的复制<br>2.求一个数组的最大值最小值<br>3.钢管分割策略<br>工程<br>1.为什么要用主健索引，索引实现的数据结构<br>2.进程的状态、进程与线程的区别<br>3.虚拟内存与物理内存，进程使用的是虚拟内存还是物理内存</p>
-<h1 id="小米">小米</h1><p>算法<br>1.二叉树PathSum的递归与非递归实现<br>2.数据流1～1000，有一个大小为m的数组，找出数据流中第一对数<br>工程<br>Java多线程内存模型、volatile<br>JVM的GC<br>Java初始化的过程<br>public class A {<br>    public void fun1() {<br>             System.out.println(“fun1…”);<br>       }<br>       public void fun2() {<br>             System.out.println(“fun2…”);<br>       }<br>}<br>class B extends A{<br>       public void fun1() {<br>             super.fun1();<br>       }</p>
-<pre><code><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">fun2</span><span class="params">()</span> </span>{
-      <span class="keyword">this</span>.fun2();
+<h1 id="小米">小米</h1><p>算法<br>1.二叉树PathSum的递归与非递归实现<br>2.数据流1～1000，有一个大小为m的数组，找出数据流中第一对数<br>工程<br>Java多线程内存模型、volatile<br>JVM的GC<br>Java初始化的过程</p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> </span>{
+             System.out.println(<span class="string">"fun1..."</span>);
+       }
+       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun2</span><span class="params">()</span> </span>{
+             System.out.println(<span class="string">"fun2..."</span>);
+       }
 }
+<span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>{
+       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> </span>{
+             <span class="keyword">super</span>.fun1();
+       }
 
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
-      A a = <span class="keyword">new</span> B();
-      a.fun1();
-      a.fun2();
+       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun2</span><span class="params">()</span> </span>{
+             <span class="keyword">this</span>.fun2();
+       }
+
+       <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+             A a = <span class="keyword">new</span> B();
+             a.fun1();
+             a.fun2();
+       }
 }
-</code></pre><p>}<br>上面一段代码运行会有怎样的结果？</p>
+</code></pre><p>上面一段代码运行会有怎样的结果？</p>
 <h1 id="美团">美团</h1><p>算法<br>1.说一说再哈希<br>2.合并链表（递归与非递归实现）<br>3.1000万个ip地址段，找出先次数最多的10个<br>（map reduce的思想：<br>map：可按ip网段分，或者MD5取模<br>reduce： 分别计算每个文件的前10然后合并）<br>4.1000万个数，求其中最大的1000个<br>（可以用优先级队列T(n) = O(nlogk),<br>或者切分法T(n) = O(n)）<br>工程<br>Linux/Shell<br>1.一个文件里有一列是ip地址，怎样取出这些ip，并且去重<br>2.怎样查看端口的状态（netstat），都有哪些状态<br>Java<br>1.垃圾回收算法<br>2.线程池，可变线程池的参数都有哪些<br>3.多线程的锁机制<br>数据库<br>1.MySQL的架构，MySQL如何分表分库</p>
 <h1 id="新浪">新浪</h1><p>一组排序的连续数组，其中一个是重复的，找出这个重复数字</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="阿里">阿里</h1><h2 id="一面（电话面）">一面（电话面）</h2><p>自我介绍</p>
-<p>工程类：<br>ArrayList和LinkedList的区别和适用场景<br>什么是死锁？<br>怎样用栈实现队列<br>JVM内存分配<br>JVM垃]]>
+    <![CDATA[<p>漫长的暑期实习面试结束了，从3月下旬到5月上旬，笔者面试了十余家公司，面试过程也多有波折。最后笔者还是如愿拿到了阿里巴巴淘宝技术部的实习Offer，此外还收到了小米影业的实习Offer。最终选择了阿里巴巴，梦想成真。 　　<br>　　尘埃落定，笔者决定将面试经验给大家分享一下。笔者面试方向以Java开发为主，内容包括Java开发基础、数据结构与算法、Linux与数据库等内容。非Java开发的同学也能从中得到启发。希望能给尚未找到暑期实习的同学提供一些帮助，给2017正式校招面试提供一些参考和借鉴<br>]]>
+    
     </summary>
     
       <category term="Java" scheme="http://wenzhuang.me/tags/Java/"/>
@@ -98,15 +113,15 @@
     <link href="http://wenzhuang.me/2017/05/01/MySQL%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/"/>
     <id>http://wenzhuang.me/2017/05/01/MySQL架构概述/</id>
     <published>2017-05-01T15:55:00.000Z</published>
-    <updated>2017-05-02T09:13:17.046Z</updated>
+    <updated>2017-05-31T12:29:23.355Z</updated>
     <content type="html"><![CDATA[<p>MySQL最重要、最与众不同的特性是它的存储引擎架构，这种架构的设计将查询处理（Query Processing）及其他系统任务（Server Task）和数据的存储/提取相分离。本文概要地描述了MySQL的服务器架构以及各存储引擎之间的主要区别。<br><a id="more"></a></p>
 <h1 id="1-MySQL逻辑架构">1.MySQL逻辑架构</h1><p>下图展示了MySQL的逻辑架构图。</p>
 <blockquote>
 <p>　<img src="http://7xo4wg.com1.z0.glb.clouddn.com/mysql_architecture.png" alt="MySQL服务器逻辑架构图"></p>
 </blockquote>
-<p>　　MySQL的逻辑架构分为三层。<br>　　最上层的服务并不是MySQL所独有，大多数基于网络的客户端/服务器的工具或者服务都有类似架构。比如连接处理、授权认证、安全等。<br>　　大多数MySQL的核心服务都在第二层，包括查询、分析、优化、缓存以及所有的内置函数，所有的跨存储引擎的功能都在这一层实现：存储过程、触发器、视图。<br>　　第三层包含了存储引擎。存储引擎负责MySQL中数据的存储和提取。服务器通过API与存储引擎进行通信，这些接口屏蔽了存储引擎间的差异性，使得这些差异对上层的查询过程透明。存储引擎不会去解析SQL（除InnoDB会解析外键之外），不同存储引擎之间也不会相互通信，而只是简单地响应上层服务器的请求。</p>
+<p>MySQL的逻辑架构分为三层。<br>　　最上层的服务并不是MySQL所独有，大多数基于网络的客户端/服务器的工具或者服务都有类似架构。比如连接处理、授权认证、安全等。<br>　　大多数MySQL的核心服务都在第二层，包括查询、分析、优化、缓存以及所有的内置函数，所有的跨存储引擎的功能都在这一层实现：存储过程、触发器、视图。<br>　　第三层包含了存储引擎。存储引擎负责MySQL中数据的存储和提取。服务器通过API与存储引擎进行通信，这些接口屏蔽了存储引擎间的差异性，使得这些差异对上层的查询过程透明。存储引擎不会去解析SQL（除InnoDB会解析外键之外），不同存储引擎之间也不会相互通信，而只是简单地响应上层服务器的请求。</p>
 <h2 id="1-1连接管理与安全性">1.1连接管理与安全性</h2><p>每一个客户端连接都会在服务器进程中拥有一个线程，这个连接的查询只会在这个单独的线程中执行。服务器会缓存线程，因此不需要为每个新建的连接创建和销毁线程。<br>　　但客户端连接到MySQL服务器时，服务器需要对其进行认证。认证基于用户名、原始主机信息和密码。一旦客户端连接成功，服务器会继续验证该客户端是否具有执行某个特定查询的权限。</p>
-<h2 id="1-2优化与执行">1.2优化与执行</h2><!--more-->
+<h2 id="1-2优化与执行">1.2优化与执行</h2><p>MySQL会解析查询，并创建内部数据结构（解析树），然后对其进行各种优化，包括重写查询、决定表的读取顺序，以及选择合适的索引等。<br>　　优化器不关心表使用的哪种存储引擎，但存储引擎对于优化查询是有影响的。<br>　　对于SELECT语句，在查询解析之前，服务器会先检查查询缓存（Query Cache），如果能够在其中找到对应的查询，服务器就不必再执行查询解析。</p>
 <h1 id="2-并发控制">2.并发控制</h1><h2 id="2-1读写锁">2.1读写锁</h2><ul>
 <li>共享锁 读锁 非阻塞</li>
 <li>排他锁 写锁 阻塞</li>
@@ -123,10 +138,16 @@
 <li>COMMIT提交事务</li>
 <li>ROLLBACK撤销事务</li>
 </ul>
-<p><strong>事务的特征ACID</strong><br><em>atomicity 原子性</em><br>一个事务必须被视为一个不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败回滚。<br><em>consistency 一致性</em><br>数据库总是从一个一致性的状态转换到另外一个一致性的状态。<br><em>isolation隔离性</em><br>通常来说，一个事务所做的修改在最终提交前，对其它事务是不可见的。<br><em>durability持久性</em><br>一旦事务提交，则其所做的修改就会永久保存到数据库中。</p>
-<h2 id="3-1隔离级别">3.1隔离级别</h2><p>SQL标准定义了四种隔离级别，每一种级别都规定了一个事务中所做的修改，哪些在事务内和事务间是可见的，哪些是不可见的。较低级别的隔离通常可以执行更高的并发，系统的开销也更低。</p>
+<p><strong>事务的特征ACID</strong></p>
 <ul>
-<li>READ UNCOMMITED（未提交读）</li>
+<li>atomicity 原子性<br>一个事务必须被视为一个不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败回滚。</li>
+<li>consistency 一致性<br>数据库总是从一个一致性的状态转换到另外一个一致性的状态。</li>
+<li>isolation隔离性<br>通常来说，一个事务所做的修改在最终提交前，对其它事务是不可见的。</li>
+<li><p>durability持久性<br>一旦事务提交，则其所做的修改就会永久保存到数据库中。</p>
+<h2 id="3-1隔离级别">3.1隔离级别</h2><p>SQL标准定义了四种隔离级别，每一种级别都规定了一个事务中所做的修改，哪些在事务内和事务间是可见的，哪些是不可见的。较低级别的隔离通常可以执行更高的并发，系统的开销也更低。</p>
+</li>
+<li><p>READ UNCOMMITED（未提交读）</p>
+</li>
 </ul>
 <p>事务中的修改即使没有提交，对其他事务也都是可见的。事务可以读取未提交的数据，这被称为脏读（Dirty Read）。</p>
 <ul>
@@ -142,23 +163,20 @@
 </ul>
 <p>SERIALIZABLE是最高的隔离级别。它通过强制事务串行执行，避免前面说的幻读的问题。</p>
 <p><img src="http://7xo4wg.com1.z0.glb.clouddn.com/mysql_isolation_table.jpg" alt="ANSI SQL隔离级别"></p>
-<h2 id="3-2死锁">3.2死锁</h2><p>死锁是指两个或者多个事务在同一资源上相互占用，并请求锁定对方占用的资源，从而导致恶性循环的现象。当多个事务试图以不同的顺序锁定资源时，就可能产生死锁。多个事务同时锁定一个资源时，也会产生死锁。<br>InnoDB目前处理死锁的方法是，将持有最少行级排他锁的事务进行回滚。<br>死锁的产生有双重因素：有些是真正的数据冲突，有些是由于存储引擎的实现方式导致的。死锁发生后，只有部分或者完全回滚其中一个事务才能打破死锁。大多数情况下，只需重新执行因死锁回滚的事务即可。</p>
-<h2 id="3-3事务日志">3.3事务日志</h2><h2 id="3-4MySQL中的事务">3.4MySQL中的事务</h2><p>MySQL中提供了两种事务型的存储引擎：InnoDB和NDB Cluster。另外还有一些第三方的存储引擎，比如XtraDB和PBXT。</p>
+<h2 id="3-2死锁">3.2死锁</h2><p>死锁是指两个或者多个事务在同一资源上相互占用，并请求锁定对方占用的资源，从而导致恶性循环的现象。当多个事务试图以不同的顺序锁定资源时，就可能产生死锁。多个事务同时锁定一个资源时，也会产生死锁。<br>　　InnoDB目前处理死锁的方法是，将持有最少行级排他锁的事务进行回滚。<br>　　死锁的产生有双重因素：有些是真正的数据冲突，有些是由于存储引擎的实现方式导致的。死锁发生后，只有部分或者完全回滚其中一个事务才能打破死锁。大多数情况下，只需重新执行因死锁回滚的事务即可。</p>
+<h2 id="3-3事务日志">3.3事务日志</h2><p>事务日志可以帮助提高事务的效率。使用事务日志，存储引擎在修改表的数据时只需要修改其内存拷贝，再把该修改行为记录到持久在硬盘上的事务日志中，而不用每次都将修改的数据本身持久到硬盘。事务日志采用的是追加的方式，事务日志持久后，内存中被修改的数据在后台可以慢慢刷回到磁盘。通常称为预写式日志（Write-Ahead Logging），修改数据需要写两次磁盘。<br>　　如果数据的修改已经记录到日志并持久化，但数据本身还没有写回磁盘，此时系统崩溃，存储引擎在重启时能够自动恢复这部分修改的数据。</p>
+<h2 id="3-4MySQL中的事务">3.4MySQL中的事务</h2><p>MySQL中提供了两种事务型的存储引擎：InnoDB和NDB Cluster。另外还有一些第三方的存储引擎也支持事务，比如XtraDB和PBXT。</p>
 <h1 id="4-多版本并发控制（MVCC）">4.多版本并发控制（MVCC）</h1><p>可以认为MVCC是行级锁的一个变种，但是在很多情况下避免了加锁操作，开销更低。<br>　　MVCC的实现，是通过保存数据在某一个时间点的快照来实现的。不管需要执行多长时间，每个事务看到的数据都是一致的。根据事务开始时间的不同，每个事务对同一张表，同一时刻看到的数据可能是不一样的。<br>　　不同存储引擎的MVCC实现不同，典型的有乐观并发控制和悲观并发控制。InnoDB的MVCC，是通过在每行记录后面保存两个隐藏的列来实现的。这两个列，一个保存了行的创建时间，一个保存行的过期时间（或删除时间）。存储的不是实际的时间值，而是系统版本号。每开始一个新的事务，系统版本号都会自动递增。事务开始时刻的系统版本号会作为事务的版本号，用来和查询到的每行记录的版本号进行比较。保存这两个额外的系统版本号，使大多数读操作都可不用加锁。不足之处是每行记录都需要额外的存储空间。MVCC只在REPEATABLE READ和READ COMMITTED两个隔离级别下工作。</p>
 <h1 id="5-存储引擎">5.存储引擎</h1><p>MySQL将每个数据库（也可称之为schema）保存为数据目录下的一个子目录。创建表时，MySQL会在数据库子目录下创建一个和表同名的.frm文件保存表的定义。</p>
-<h2 id="5-1_InnoDB">5.1 InnoDB</h2><p>　　MySQL默认的事务型引擎。<br>　　InnoDB采用MVCC来支持高并发，并且实现了四个标准的隔离级别。<br>默认REPEATABLE READ，通过间隙锁（next-key locking）策略防止幻读的出现。间隙锁使得InnoDB不仅仅锁定查询涉及的行，还会对索引中的间隙进行锁定，以防止幻影行的插入。<br>　　InnoDB是基于聚簇索引建立的，对之间查询有很高的性能。它的二级索引（非主键索引）中必须包含主键列，如果主键列很大的话，其它所有索引都会很大。<br>　　从磁盘读取数据时采用可预测性预读，能够自动在内存中创建hash索引以加速读操作的自适应哈希索引(adaptive hash index)，以及能够加速插入操作的插入缓冲区（insert buffer）等。<br>参见 官方手册《InnoDB事务模型和锁》<br>　　InnoDB可以通过一些机制和工具支持真正的热备份，Oracle的MySQL Enterprise Backup、Percona的XtraBackup可以做到这一点。MySQL的其它存储引擎不支持热备份，要获取一致性视图需要停止对所有表的写入。</p>
-<h2 id="5-2_MyISAM">5.2 MyISAM</h2><p>MyISAM支持全文本索引、压缩、空间函数（GIS）等。不支持事务和行级锁，崩溃后无法安全恢复。<br>　　MyISAM将表存在两个文件中：数据文件（.MYD）索引文件（.MYI）。如果表是变长行，则默认配置只能处理256TB的数据。<br>特性
-　　</p>
+<h2 id="5-1_InnoDB">5.1 InnoDB</h2><p>MySQL默认的事务型引擎。<br>　　InnoDB采用MVCC来支持高并发，并且实现了四个标准的隔离级别。<br>默认REPEATABLE READ，通过间隙锁（next-key locking）策略防止幻读的出现。间隙锁使得InnoDB不仅仅锁定查询涉及的行，还会对索引中的间隙进行锁定，以防止幻影行的插入。<br>　　InnoDB是基于聚簇索引建立的，对之间查询有很高的性能。它的二级索引（非主键索引）中必须包含主键列，如果主键列很大的话，其它所有索引都会很大。<br>　　从磁盘读取数据时采用可预测性预读，能够自动在内存中创建hash索引以加速读操作的自适应哈希索引(adaptive hash index)，以及能够加速插入操作的插入缓冲区（insert buffer）等。<br>参见 官方手册《InnoDB事务模型和锁》<br>　　InnoDB可以通过一些机制和工具支持真正的热备份，Oracle的MySQL Enterprise Backup、Percona的XtraBackup可以做到这一点。MySQL的其它存储引擎不支持热备份，要获取一致性视图需要停止对所有表的写入。</p>
+<h2 id="5-2_MyISAM">5.2 MyISAM</h2><p>MyISAM支持全文本索引、压缩、空间函数（GIS）等。不支持事务和行级锁，崩溃后无法安全恢复。<br>　　MyISAM将表存在两个文件中：数据文件（.MYD）索引文件（.MYI）。如果表是变长行，则默认配置只能处理256TB的数据。</p>
 <ul>
 <li>加锁与并发<br>对整张表而不是行加锁。但是在表有读取查询的同时，也可以往表中插入新的记录（并发插入，concurrent insert）</li>
-<li>修复</li>
+<li>修复<br>　CHECK TABLE mytabl　检查表的错误。<br>　REPAIR TABLE mytable 进行修复。<br>　当MySQL服务器关闭，可以用myisamchk命令行工具进行检查和修复。</li>
+<li>索引<br>即使是BLOB和TEXT等长字段，也可以基于其前500个字符创建索引。MyISAM也支持全文本索引，是一种基于分词创建的索引，可以支持复杂的查询。</li>
+<li>延迟更新索引键（Delay Key Write）</li>
 </ul>
-<p>　CHECK TABLE mytabl　检查表的错误。<br>　REPAIR TABLEmytable进行修复。<br>　MySQL服务器关闭，可以用myisamchk命令行工具进行检查和修复。</p>
-<p>　</p>
-<ul>
-<li>索引<br>即使是BLOB和TEXT等长字段，也可以基于其前500个字符创建索引。MyISAM也支持全文本索引，是一种基于分词创建的索引，可以支持复杂的查询。延迟更新索引键（Delay Key Write）</li>
-<li>创建MyISAM表</li>
-</ul>
+<p><strong><em>参考书籍：<a href="https://book.douban.com/subject/23008813/" target="_blank" rel="external">《高性能MySQL》</a></em></strong></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>MySQL最重要、最与众不同的特性是它的存储引擎架构，这种架构的设计将查询处理（Query Processing）及其他系统任务（Server Task）和数据的存储/提取相分离。本文概要地描述了MySQL的服务器架构以及各存储引擎之间的主要区别。<br>]]>
