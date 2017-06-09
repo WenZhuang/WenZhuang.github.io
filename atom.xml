@@ -32,7 +32,7 @@
     <link href="http://wenzhuang.me/2017/05/17/2017%E6%9A%91%E6%9C%9F%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/"/>
     <id>http://wenzhuang.me/2017/05/17/2017暑期实习面经/</id>
     <published>2017-05-17T11:59:33.000Z</published>
-    <updated>2017-06-06T13:57:58.654Z</updated>
+    <updated>2017-06-09T10:29:27.552Z</updated>
     <content type="html"><![CDATA[<p>漫长的暑期实习面试结束了，从3月下旬到5月上旬，笔者面试了十余家公司，面试过程也多有波折。最后笔者还是如愿拿到了阿里巴巴淘宝技术部的实习Offer，此外还收到了小米影业的实习Offer。最终选择了阿里巴巴，梦想成真。 　　<br>　　尘埃落定，笔者决定将面试经验给大家分享一下。笔者面试方向以Java开发为主，内容包括Java开发基础、数据结构与算法、Linux与数据库等内容。非Java开发的同学也能从中得到启发。希望能给尚未找到暑期实习的同学提供一些帮助，给2017正式校招面试提供一些参考和借鉴<br><a id="more"></a></p>
 <h1 id="面试题分类"><strong>面试题分类</strong></h1><p>Java开发面试中JVM和多线程几乎是必问的两个点，笔者推荐两本书，<a href="https://book.douban.com/subject/24722612/" target="_blank" rel="external">《深入理解Java虚拟机》</a>和<a href="https://book.douban.com/subject/10484692/" target="_blank" rel="external">《Java并发编程实战》</a>。由于很多公司的面试题存在大量重复，这里先整理了出现频率比较高的面试题。然后再逐一介绍各个公司的面试算法题。</p>
 <h1 id="JVM相关">JVM相关</h1><ol>
@@ -152,7 +152,7 @@
 </ol>
 <h1 id="小米">小米</h1><ol>
 <li>二叉树PathSum的递归与非递归实现</li>
-<li>数据流1～1000，有一个大小为m的数组，找出数据流中第一对数</li>
+<li>整数数据流，整数大小在1和1000之间，有一个大小为m的数组，找出数据流中第一对数，它们的和为数组中的某一元素</li>
 <li>下面一段代码运行会有怎样的结果？</li>
 </ol>
 <pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>{
@@ -199,7 +199,7 @@
     <link href="http://wenzhuang.me/2017/05/01/MySQL%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/"/>
     <id>http://wenzhuang.me/2017/05/01/MySQL架构概述/</id>
     <published>2017-05-01T15:55:00.000Z</published>
-    <updated>2017-05-31T12:29:23.355Z</updated>
+    <updated>2017-06-09T10:06:16.161Z</updated>
     <content type="html"><![CDATA[<p>MySQL最重要、最与众不同的特性是它的存储引擎架构，这种架构的设计将查询处理（Query Processing）及其他系统任务（Server Task）和数据的存储/提取相分离。本文概要地描述了MySQL的服务器架构以及各存储引擎之间的主要区别。<br><a id="more"></a></p>
 <h1 id="1-MySQL逻辑架构">1.MySQL逻辑架构</h1><p>下图展示了MySQL的逻辑架构图。</p>
 <blockquote>
@@ -215,7 +215,7 @@
 <p>写锁比读锁有更高的优先级，可以插入到读锁队列的前面</p>
 <h2 id="2-2锁粒度">2.2锁粒度</h2><p>锁策略：在锁的开销和数据的安全性之间寻求平衡</p>
 <ul>
-<li>表锁 开销最小 alter table表锁</li>
+<li>表锁 开销最小</li>
 <li>行锁 最大并发度，最大锁开销</li>
 </ul>
 <h1 id="3-事务">3.事务</h1><p>事务是一组原子性的SQL查询，或者说一个独立的工作单元。事务内的语句要么全部执行成功，要么全部执行失败。</p>
@@ -251,17 +251,110 @@
 <p><img src="http://7xo4wg.com1.z0.glb.clouddn.com/mysql_isolation_table.jpg" alt="ANSI SQL隔离级别"></p>
 <h2 id="3-2死锁">3.2死锁</h2><p>死锁是指两个或者多个事务在同一资源上相互占用，并请求锁定对方占用的资源，从而导致恶性循环的现象。当多个事务试图以不同的顺序锁定资源时，就可能产生死锁。多个事务同时锁定一个资源时，也会产生死锁。<br>　　InnoDB目前处理死锁的方法是，将持有最少行级排他锁的事务进行回滚。<br>　　死锁的产生有双重因素：有些是真正的数据冲突，有些是由于存储引擎的实现方式导致的。死锁发生后，只有部分或者完全回滚其中一个事务才能打破死锁。大多数情况下，只需重新执行因死锁回滚的事务即可。</p>
 <h2 id="3-3事务日志">3.3事务日志</h2><p>事务日志可以帮助提高事务的效率。使用事务日志，存储引擎在修改表的数据时只需要修改其内存拷贝，再把该修改行为记录到持久在硬盘上的事务日志中，而不用每次都将修改的数据本身持久到硬盘。事务日志采用的是追加的方式，事务日志持久后，内存中被修改的数据在后台可以慢慢刷回到磁盘。通常称为预写式日志（Write-Ahead Logging），修改数据需要写两次磁盘。<br>　　如果数据的修改已经记录到日志并持久化，但数据本身还没有写回磁盘，此时系统崩溃，存储引擎在重启时能够自动恢复这部分修改的数据。</p>
-<h2 id="3-4MySQL中的事务">3.4MySQL中的事务</h2><p>MySQL中提供了两种事务型的存储引擎：InnoDB和NDB Cluster。另外还有一些第三方的存储引擎也支持事务，比如XtraDB和PBXT。</p>
+<h2 id="3-4MySQL中的事务">3.4MySQL中的事务</h2><p>MySQL中提供了两种事务型的存储引擎：InnoDB和NDB Cluster。另外还有一些第三方的存储引擎，比如XtraDB和PBXT。<br>MySQL默认采用自动提交（AUTOCOMMIT）模式。也就是说，如果不是显式地开始一个事务，则每个查询都被当做一个事务执行提交操作。在当前连接中，可以通过设置AUTOCOMMIT变量来启用或者禁用自动提交模式。还有一些命令，在执行前强制执行COMMIT提交当前的活动事务。如ALTER TABLE、LOCK TABLES等。MySQL可以通过执行SET TRANSACTION LEVEL命令来设置隔离级别。MySQL能够识别所有的4个ANSI隔离级别，InnoDB引擎也支持所有的隔离级别。<br>MySQL服务器层不管理事务，事务是由下层的存储引擎实现的。所有在同一个事务中，使用多种存储引擎是不可靠的。<br>InnoDB采用的两阶段锁定协议（two-phase locking protocol）。在事务执行过程中，随时都可以执行锁定，锁只有在执行COMMIT或者ROLLBACK的时候才会释放，并且所有的锁是在同一时刻被释放。InnoDB会根据隔离级别在需要的时候自动加锁。InnoDB也支持通过特定的语句进行显示锁定，如SET … LOCK IN SHARE MODE等。</p>
 <h1 id="4-多版本并发控制（MVCC）">4.多版本并发控制（MVCC）</h1><p>可以认为MVCC是行级锁的一个变种，但是在很多情况下避免了加锁操作，开销更低。<br>　　MVCC的实现，是通过保存数据在某一个时间点的快照来实现的。不管需要执行多长时间，每个事务看到的数据都是一致的。根据事务开始时间的不同，每个事务对同一张表，同一时刻看到的数据可能是不一样的。<br>　　不同存储引擎的MVCC实现不同，典型的有乐观并发控制和悲观并发控制。InnoDB的MVCC，是通过在每行记录后面保存两个隐藏的列来实现的。这两个列，一个保存了行的创建时间，一个保存行的过期时间（或删除时间）。存储的不是实际的时间值，而是系统版本号。每开始一个新的事务，系统版本号都会自动递增。事务开始时刻的系统版本号会作为事务的版本号，用来和查询到的每行记录的版本号进行比较。保存这两个额外的系统版本号，使大多数读操作都可不用加锁。不足之处是每行记录都需要额外的存储空间。MVCC只在REPEATABLE READ和READ COMMITTED两个隔离级别下工作。</p>
 <h1 id="5-存储引擎">5.存储引擎</h1><p>MySQL将每个数据库（也可称之为schema）保存为数据目录下的一个子目录。创建表时，MySQL会在数据库子目录下创建一个和表同名的.frm文件保存表的定义。</p>
 <h2 id="5-1_InnoDB">5.1 InnoDB</h2><p>MySQL默认的事务型引擎。<br>　　InnoDB采用MVCC来支持高并发，并且实现了四个标准的隔离级别。<br>默认REPEATABLE READ，通过间隙锁（next-key locking）策略防止幻读的出现。间隙锁使得InnoDB不仅仅锁定查询涉及的行，还会对索引中的间隙进行锁定，以防止幻影行的插入。<br>　　InnoDB是基于聚簇索引建立的，对之间查询有很高的性能。它的二级索引（非主键索引）中必须包含主键列，如果主键列很大的话，其它所有索引都会很大。<br>　　从磁盘读取数据时采用可预测性预读，能够自动在内存中创建hash索引以加速读操作的自适应哈希索引(adaptive hash index)，以及能够加速插入操作的插入缓冲区（insert buffer）等。<br>参见 官方手册《InnoDB事务模型和锁》<br>　　InnoDB可以通过一些机制和工具支持真正的热备份，Oracle的MySQL Enterprise Backup、Percona的XtraBackup可以做到这一点。MySQL的其它存储引擎不支持热备份，要获取一致性视图需要停止对所有表的写入。</p>
-<h2 id="5-2_MyISAM">5.2 MyISAM</h2><p>MyISAM支持全文本索引、压缩、空间函数（GIS）等。不支持事务和行级锁，崩溃后无法安全恢复。<br>　　MyISAM将表存在两个文件中：数据文件（.MYD）索引文件（.MYI）。如果表是变长行，则默认配置只能处理256TB的数据。</p>
-<ul>
-<li>加锁与并发<br>对整张表而不是行加锁。但是在表有读取查询的同时，也可以往表中插入新的记录（并发插入，concurrent insert）</li>
-<li>修复<br>　CHECK TABLE mytabl　检查表的错误。<br>　REPAIR TABLE mytable 进行修复。<br>　当MySQL服务器关闭，可以用myisamchk命令行工具进行检查和修复。</li>
-<li>索引<br>即使是BLOB和TEXT等长字段，也可以基于其前500个字符创建索引。MyISAM也支持全文本索引，是一种基于分词创建的索引，可以支持复杂的查询。</li>
-<li>延迟更新索引键（Delay Key Write）</li>
+<h2 id="5-2_MyISAM">5.2 MyISAM</h2><p>MyISAM支持全文本索引、压缩、空间函数（GIS）等。不支持事务和行级锁，崩溃后无法安全恢复。</p>
+<h3 id="存储">存储</h3><p>　　MyISAM将表存在两个文件中：数据文件（.MYD）索引文件（.MYI）。如果表是变长行，则默认配置只能处理256TB的数据。</p>
+<h3 id="特性">特性</h3><ul>
+<li><p>加锁与并发<br>对整张表而不是行加锁。但是在表有读取查询的同时，也可以往表中插入新的记录（并发插入，concurrent insert）</p>
+</li>
+<li><p>修复<br>CHECK TABLE mytabl　检查表的错误。<br>REPAIR TABLE mytable 进行修复。<br>当MySQL服务器关闭，可以用myisamchk命令行工具进行检查和修复。</p>
+</li>
+<li><p>索引<br>即使是BLOB和TEXT等长字段，也可以基于其前500个字符创建索引。MyISAM也支持全文本索引，是一种基于分词创建的索引，可以支持复杂的查询。</p>
+</li>
+<li><p>延迟更新索引键（Delay Key Write）<br>在创建MyISAM表的时候，如果指定了DELAY_KEY_WRITE选项，在每次修改执行完成时，不会立刻将修改的索引数据写入磁盘，而是会写到内存中的键缓冲区（in-memory key buffer），只有在清理键缓存区或者关闭表的时候才会将对应的索引块写入到磁盘，极大地提升了写入性能。</p>
+</li>
 </ul>
+<h3 id="压缩表">压缩表</h3><p>如果表在创建并导入数据后，不会再进行修改操作，那么这样的或许适合采用MyISAM压缩表。可以使用myisampack对MyISAM表进行压缩。压缩表能极大减少磁盘空间占用和磁盘I/O。</p>
+<h2 id="5-3_MySQL内建的其它存储引擎">5.3 MySQL内建的其它存储引擎</h2><ul>
+<li>Archive</li>
+</ul>
+<p>只支持INSERT和SELECT操作。</p>
+<ul>
+<li>Blackhole</li>
+</ul>
+<p>没有实现任何的存储机制，会丢弃所有插入的数据。但是服务器会记录Blackhole表的日志。</p>
+<ul>
+<li>CVS</li>
+</ul>
+<p>CVS引擎可以将普通的CVS文件（逗号分割值的文件）作为MySQL的表来处理。CVS引擎可以作为一种数据交换的机制。</p>
+<ul>
+<li>Frederated</li>
+</ul>
+<p>Frederated引擎是访问其他MySQL服务器的一个代理，它会创建一个到远程MySQL服务器的客户端连接，并将查询传输到远程服务器执行，然后提取或者发送需要的数据。</p>
+<ul>
+<li>Memory</li>
+</ul>
+<p>所有的数据都保存在内存中，可以快速地访问数据，但是重启后数据会丢失。支持Hash索引，查找非常快；表级锁，并发度低。在以下场景表现很好：用于查找或者映射表；用于缓存周期性聚合数据的结果；用于保存数据分析中产生的中间数据。</p>
+<ul>
+<li>NDB集群引擎</li>
+</ul>
+<p>MySQL服务器、NDB集群存储引擎，以及分布式、share-nothing的、容灾的、高可用的NDB数据库的组合，被称为MySQL集群。</p>
+<h2 id="5-4_第三方存储引擎">5.4 第三方存储引擎</h2><h3 id="OLTP类引擎">OLTP类引擎</h3><p>OLTP，On-Line Transaction Processing，联机事务处理过程。</p>
+<ul>
+<li>XtraDB是基于InnoDB引擎的一个改进版本，改进点主要集中在性能、可测量性和操作灵活性方面。</li>
+<li>PBXT支持引擎级别的复制、外键约束，并以一种比较复制的架构对固态存储（SSD）提供了适当的支持，还对较大的值类型BLOB也做了优化。</li>
+<li>TokuDB引擎使用了一种新的叫做分形树（Fractal Trees）的索引数据结构，TokuDB是一种大数据存储引擎，拥有很高的压缩比，可以在很大的数据量上创建大量索引。</li>
+<li>Rethinck最初是为固态存储设计的，采用了一种只能追加的写时复制B树（append-only copyon-write B-Tree）作为索引的数据结构。</li>
+</ul>
+<h3 id="面向列的存储引擎">面向列的存储引擎</h3><p>MySQL默认是面向行的，而在大数据量处理时，面向列的方式可能效率更高。如果不需要整行的数据，面向列的方式可以传输更少的数据。如果每一列都单独存储，那么压缩的效率也会更高。</p>
+<ul>
+<li>Infobright是最有名的面向列的存储引擎。在非常大的的数据量（数十TB）时，该引擎工作良好。Infobright是为数据分析和数据仓库应用设计的。数据高度压缩，按照块进行排序，每个块都对应有一组元数据。但该引擎不支持索引，但是块结构也是一种准索引（quasi-index）。</li>
+<li>InfiniDB可以在一组机器集群间做分布式查询。</li>
+</ul>
+<h3 id="社区存储引擎">社区存储引擎</h3><p>大部分影响力有限，不建议使用。</p>
+<h2 id="5-5_引擎的选择">5.5 引擎的选择</h2><p>除非需要用到某些InnoDB不具备的特性，并且没有其他办法可以代替，否则都应该选择InnoDB引擎。除非万不得已，不要混合使用多种存储引擎。<br>如果需要不同的存储引擎，需要考虑以下几个因素：</p>
+<ul>
+<li>事务 InnoDB支持事务</li>
+<li>备份 InnoDB支持在线热备份</li>
+<li>崩溃恢复 相对来说，MyISAM崩溃后发生损坏的概率比InnoDB要高的多，而且恢复速度也要慢。</li>
+<li>特有的特性 比如，MySQL中只有MyISAM支持地理空间搜索。</li>
+</ul>
+<h3 id="应用场景">应用场景</h3><ul>
+<li>日志型应用</li>
+</ul>
+<p>这一类应用对插入速度有很高的要求，数据库不能成为瓶颈。MyISAM或者Archive存储引擎对这类应用比较合适，因为它们开销低，而插入速度非常快。</p>
+<ul>
+<li>只读或者大部分情况下只读的表</li>
+</ul>
+<p>建议InnoDB。随着应用压力的上升，MyISAM可能会存在各种锁争用、崩溃后数据丢失的问题。</p>
+<ul>
+<li>订单处理</li>
+</ul>
+<p>需要支持事务，InnoDB是最佳选择</p>
+<ul>
+<li>电子公告牌和主题讨论论坛</li>
+</ul>
+<p>MyISAM对SELECT COUNT(*) FROM table等查询语句非常快。</p>
+<ul>
+<li>CD-ROM应用</li>
+</ul>
+<p>可以考虑使用MyISAM表或MyISAM压缩表</p>
+<ul>
+<li>大数据量</li>
+</ul>
+<p>Infobright是MySQL数据仓库最成功的解决方案，也有些大数据适合TokuDB。</p>
+<h2 id="5-6转换表的引擎">5.6转换表的引擎</h2><ol>
+<li><p>ALTER TABLE</p>
+<pre><code>mysql&gt; ALTEE TABLE mytable ENGINE = InnoDB<span class="comment">;</span>
+</code></pre><p>需要执行很长时间，MySQL会按行将原表数据复制到一张新表中，同时原表上会加上读锁。</p>
+</li>
+<li><p>导出和导入 使用mysqldump工具将数据导出到文件，然后修改文件中的CREATE TABLE语句的存储引擎选项，同时修改表名。</p>
+</li>
+<li><p>创建和查询（CREATE和SELECT）<br>综合了第一种方法的高效和第二种方法的安全。先创建一个新的存储引擎的表，然后利用INSERT…SELECT语法来导数据：</p>
+<pre><code>mysql&gt; <span class="keyword">CREATE</span> TABLE innodb_table LIKE  myisam_table;
+mysql&gt; ALTEE TABLE innodb_table ENGINE = InnoDB;
+mysql&gt; INSERT <span class="keyword">INTO</span> innodb_table <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myisam_table;
+</code></pre><p>如果数据量很大，可以考虑作分批处理，针对每一段数据执行事务提交操作：</p>
+<pre><code>mysql&gt; START TRANSACTION;
+mysql&gt; INSERT <span class="keyword">INTO</span> innodb_table <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myisam_table <span class="keyword">WHERE</span> id BETWEEN x <span class="keyword">AND</span> y;
+mysql&gt; COMMIT;
+</code></pre><p>如果有必要，可以在执行的过程中对原表加锁，以确保新表和原表的数据一致。</p>
+</li>
+</ol>
+<h1 id="6-总结">6.总结</h1><p>MySQL拥有分层的架构，上层是服务器层的服务和查询执行引擎，下层则是存储引擎。<br>　　MySQL最初基于ISAM构建（后来被MyISAM取代），其后陆续添加了更多的存储引擎和事务支持。从MySQL 5.5起，InnoDB成为默认的存储引擎。InnoDB对绝大多数用户来说都是最佳选择。</p>
 <p><strong><em>参考书籍：<a href="https://book.douban.com/subject/23008813/" target="_blank" rel="external">《高性能MySQL》</a></em></strong></p>
 ]]></content>
     <summary type="html">
